@@ -1,13 +1,24 @@
 import pandas as pd
 
 class SIM:
-    def __init__(self, sim_type='time'):
+    def __init__(self, model_pipeline, sim_type='time'):
+        """
+        This class serves a basic outline to build quick, lightweight data sims on. 
+        To use, set the sim_type as one of the following:
+            "time": use for sequential time series data. 
+        Include a model pipeline as a single function.
+
+        The RUN function will execute all columns of the inputs through the model pipeline to generate a prediction.
+        """
         self._type_ = sim_type
         self.sim = pd.DataFrame()
-        self.model_pipeline = None
+        self.model_pipeline = model_pipeline
 
     def populate_inputs(self, **kwargs):
-        """Fills base dataframe with input portion of sim"""
+        """
+        Fills base dataframe with input portion of sim.
+        Use keywords paired with corresponding list of data for dataframe generation.
+        """
         if self._type_ == 'time':
             header_tracker = ''
             try:
